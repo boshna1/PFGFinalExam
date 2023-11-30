@@ -42,6 +42,7 @@ public class BallController : MonoBehaviour
             uiManager.GameOver();
             GameStart = false;
         }
+        
     }
 
     void SwitchAxis()
@@ -71,11 +72,6 @@ public class BallController : MonoBehaviour
         if (collision.transform.tag == "Diamond")
         {
             Destroy(collision.gameObject);
-        }
-        if (collision.transform.tag == "PlatformCube")
-        {
-            Debug.Log("Colliding");
-            rb.useGravity = false;
         }
 
     }
