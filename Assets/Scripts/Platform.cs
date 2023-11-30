@@ -15,6 +15,7 @@ public class Platform : MonoBehaviour
     {
         if (collision.transform.tag == "Ball")
         {
+            this.GetComponent<BoxCollider>().enabled = false;
             Invoke("EnableFall",0.5f);
             Invoke("Destroy",2);
 

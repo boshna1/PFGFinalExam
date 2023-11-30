@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlatformGeneration : MonoBehaviour
 {
+    bool GameStart;
     public GameObject platform;
     public GameObject diamond;
     Vector3 placement = new Vector3(4.5f,0.25f,5.5f);
@@ -31,28 +32,35 @@ public class PlatformGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer == true)
+        if (Input.GetMouseButtonDown(0)) 
         {
-            GenerateTile();
-            int random = Random.Range(0, 2);
-            if (random == 0)
-            {
-                placement += new Vector3(1, 0, 0);
-            }
-            if (random == 1)
-            {
-                placement += new Vector3(0, 0, 1);
-            }
-            GenerateDiamond();
-            timer = false;
-            Invoke("TimerReset", 0.2f);
+            GameStart = true;
         }
+        if (GameStart == true)
+        {
+            if (timer == true)
+            {
+                GenerateTile();
+                int random = Random.Range(0, 2);
+                if (random == 0)
+                {
+                    placement += new Vector3(1, 0, 0);
+                }
+                if (random == 1)
+                {
+                    placement += new Vector3(0, 0, 1);
+                }
+                GenerateDiamond();
+                timer = false;
+                Invoke("TimerReset", 0.2f);
+            }
+        }
+        
     }
 
     void GenerateTile()
     {
-        
-        
+     
         Instantiate(platform, placement, Quaternion.identity);
     }
 
@@ -66,7 +74,8 @@ public class PlatformGeneration : MonoBehaviour
         int random = Random.Range(0, 5);
         if (random == 0)
         {
-            Instantiate(diamond, placement + new Vector3(0,0.5f,0), Quaternion.identity);
+            GameObject newDiamond = Instantiate(diamond, placement + new Vector3(0,1,0), Quaternion.identity);
+            newDiamond.transform.localScale += (new Vector3(40,40,40));
         }
     }
 }
